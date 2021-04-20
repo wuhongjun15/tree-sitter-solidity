@@ -26,10 +26,11 @@ const PREC = {
     NEW: 13,
     MEMBER: 14 
 }
+const version = token(/\d+\.\d+\.\d+/)
 
 // The following is the core grammar for Solidity. It accepts Solidity smart contracts between the versions 0.4.x and 0.7.x.
 module.exports = grammar({
-    name: 'Solidity',
+    name: 'solidity',
 
     // Extras is an array of tokens that is allowed anywhere in the document.
     extras: $ => [
@@ -43,6 +44,17 @@ module.exports = grammar({
     // Documentation: https://tree-sitter.github.io/tree-sitter/creating-parsers#keywords
     word: $ => $.identifier,
 
+    supertypes: $ => [
+		$._literal,
+	    // $.expression,
+	    // $.declaration,
+	    // $.statement,
+	    // $.primary_expression,
+	    // $._literal,
+	    // $._type,
+	    // $._simple_type,
+	    // $._unannotated_type,
+    ],
     conflicts: $ => [
         [$._primary_expression, $.type_name],
         [$._parameter_list, $.fallback_receive_definition],
@@ -79,9 +91,9 @@ module.exports = grammar({
 
         _pragma_version_constraint: $ => seq(
             optional($._solidity_version_comparison_operator),
-            $._solidity_version,
+			$._literal,
         ),
-        _solidity_version: $ => /\d+(.\d+(.\d+)?)?/,
+        version_literal: $ => token(version),
         _solidity_version_comparison_operator: $ => choice("<=", "<", "^", ">", ">=", "~", "="),
 
         // Import
@@ -918,11 +930,12 @@ module.exports = grammar({
             $.boolean_literal,
             $.hex_string_literal,
             $.unicode_string_literal,
+			$.version_literal,
         ),
 
         string_literal: $ => prec.left(repeat1($.string)),
-        number_literal: $ => seq(choice($._decimal_number, $._hex_number), optional($.number_unit)),
-        _decimal_number: $ =>  choice(
+        number_literal: $ => seq(choice($.decimal_number, $._hex_number), optional($.number_unit)),
+        decimal_number: $ =>  choice(
             /\d+(\.\d+)?([eE](-)?\d+)?/,
             /\.\d+([eE](-)?\d+)?/,
         ),
@@ -1001,6 +1014,9 @@ module.exports = grammar({
   }
 );
 
+function sep1 (rule, separator) {
+  return seq(rule, repeat(seq(separator, rule)));
+}
 function dotSep1(rule) {
     return seq(
         rule,
@@ -1045,4 +1061,3 @@ function optionalDashSeparation(rule) {
         ),
     );  
 }
-  

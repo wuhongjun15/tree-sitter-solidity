@@ -1,12 +1,14 @@
 {
   "name": "tree-sitter-solidity",
-  "version": "1.0.5",
-  "description": "A tree sitter parser for Solidity",
-  "main": "index.js",
+  "version": "1.0.6",
+  "description": "A tree sitter parser for solidity, can be used to generate DFG",
+  "main": "bindings/node",
   "scripts": {
-    "test": "tree-sitter generate && tree-sitter test"
+    "generate": "tree-sitter generate",
+    "test": "tree-sitter test"
   },
-  "author": "Joran Honig",
+  "original author": "Joran Honig",
+  "modifier": "wuhongjun15",
   "license": "MIT",
   "dependencies": {
     "nan": "^2.14.1"
