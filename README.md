@@ -4,7 +4,7 @@
 
 > 💡 this grammar is still in development, the structure of the generated AST is not stable
 
-This repository forked from [JoranHonig/tree-sitter-solidity](https://github.com/JoranHonig/tree-sitter-solidity,) contains a grammar for [tree-sitter](https://github.com/tree-sitter/tree-sitter).
+This repository forked from [JoranHonig/tree-sitter-solidity](https://github.com/JoranHonig/tree-sitter-solidity) contains a grammar for [tree-sitter](https://github.com/tree-sitter/tree-sitter).
 
 The goal of this project is to provide an parser efficient low-dependency parser for solidity which targets most solidity versions in use and is designed for generating DFG .
 
