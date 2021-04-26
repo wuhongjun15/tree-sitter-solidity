@@ -438,8 +438,8 @@ module.exports = grammar({
         block_statement: $ => seq('{', repeat($._statement), "}"),
         variable_declaration_statement: $ => prec(3,seq(
                 choice(
-                    seq($.variable_declaration, optional(seq('=', $._expression))),
-                    seq($.variable_declaration_tuple, '=', $._expression),
+                    seq(field('left',$.variable_declaration), optional(seq('=', field('right',$._expression)))),
+                    seq(field('left',$.variable_declaration_tuple), '=', field('right',$._expression)),
                 ),
                 $._semicolon
         )),
