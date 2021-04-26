@@ -2186,8 +2186,12 @@
                 "type": "SEQ",
                 "members": [
                   {
-                    "type": "SYMBOL",
-                    "name": "variable_declaration"
+                    "type": "FIELD",
+                    "name": "left",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "variable_declaration"
+                    }
                   },
                   {
                     "type": "CHOICE",
@@ -2200,8 +2204,12 @@
                             "value": "="
                           },
                           {
-                            "type": "SYMBOL",
-                            "name": "_expression"
+                            "type": "FIELD",
+                            "name": "right",
+                            "content": {
+                              "type": "SYMBOL",
+                              "name": "_expression"
+                            }
                           }
                         ]
                       },
@@ -2216,16 +2224,24 @@
                 "type": "SEQ",
                 "members": [
                   {
-                    "type": "SYMBOL",
-                    "name": "variable_declaration_tuple"
+                    "type": "FIELD",
+                    "name": "left",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "variable_declaration_tuple"
+                    }
                   },
                   {
                     "type": "STRING",
                     "value": "="
                   },
                   {
-                    "type": "SYMBOL",
-                    "name": "_expression"
+                    "type": "FIELD",
+                    "name": "right",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "_expression"
+                    }
                   }
                 ]
               }
